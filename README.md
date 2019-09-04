@@ -34,10 +34,12 @@ const ite = graph.iterator({ from: 'a', label: 'my-label', depth: 1 })
 Creates a new graph that uses the `trie` for storage.
 
 #### `await graph.put(from, to, label, [cb])`
-Creates a labelled edge between `from` and `to`. Returns a Promise.
+Creates a labelled edge between `from` and `to`.
+
+Returns a Promise, and can optionally be used with a callback.
 
 #### `await graph.del(from, to, label, [cb])`
-Delete the edge.
+Delete an edge.
 
 #### `await graph.batch(ops, [cb])`
 Batch insert/delete many edges.
