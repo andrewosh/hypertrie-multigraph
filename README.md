@@ -39,6 +39,19 @@ Creates a labelled edge between `from` and `to`. Returns a Promise.
 #### `await graph.del(from, to, label, [cb])`
 Delete the edge.
 
+#### `await graph.batch(ops, [cb])`
+Batch insert/delete many edges.
+
+`ops` is an Array with entries of the form:
+```js
+{
+  type: 'put' | 'del',
+  from: 'a',
+  to: 'b',
+  label: 'my-label
+}
+```
+
 #### `const ite = graph.iterator(opts)`
 Creates a depth-first graph iterator that accepts the following options:
 ```js
