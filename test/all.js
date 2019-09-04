@@ -28,7 +28,7 @@ test('multi-level one-label graph traversal for a single key', async t => {
   t.end()
 })
 
-test('can get all targets with a given label', async t => {
+test('can get all edges with a given label', async t => {
   const trie = hypertrie(ram)
   const graph = new Graph(trie)
 
@@ -36,6 +36,18 @@ test('can get all targets with a given label', async t => {
 
   const ite = graph.iterator({ label: 'parent', depth: 1 })
   await validate(t, ite, [['a', 'b'], ['b', 'c'], ['a', 'd'], ['e', 'f']])
+
+  t.end()
+})
+
+test('cycles are handled correctly', async t => {
+  const trie = hypertrie(ram)
+  const graph = new Graph(trie)
+
+  await cyclicGraph(graph)
+
+  const ite = graph.iterator({ from: 'a', label: 'parent' })
+  await validate(t, ite, [['a', 'b'], ['b', 'c'], ['c', 'a']])
 
   t.end()
 })
@@ -49,6 +61,12 @@ async function simpleGraph (graph) {
   await graph.put('d', 'a', 'child')
   await graph.put('e', 'f', 'parent')
   await graph.put('f', 'e', 'child')
+}
+
+async function cyclicGraph (graph) {
+  await graph.put('a', 'b', 'parent')
+  await graph.put('b', 'c', 'parent')
+  await graph.put('c', 'a', 'parent')
 }
 
 async function validate (t, ite, expected) {
