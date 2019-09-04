@@ -27,6 +27,16 @@ class HypertrieGraph {
     }))
   }
 
+  del (from, to, label, cb) {
+    const key = this._key({ label, from, to })
+    return maybe(cb, new Promise((resolve, reject) => {
+      this.trie.del(key, err => {
+        if (err) return reject(err)
+        return resolve()
+      })
+    }))
+  }
+
   iterator (opts = {}) {
     const self = this
 

@@ -52,6 +52,23 @@ test('cycles are handled correctly', async t => {
   t.end()
 })
 
+test('deletions work correctly', async t => {
+  const trie = hypertrie(ram)
+  const graph = new Graph(trie)
+
+  await simpleGraph(graph)
+
+  var ite = graph.iterator({ label: 'parent', depth: 1 })
+  await validate(t, ite, [['a', 'b'], ['b', 'c'], ['a', 'd'], ['e', 'f']])
+
+  await graph.del('a', 'd', 'parent')
+
+  ite = graph.iterator({ label: 'parent', depth: 1 })
+  await validate(t, ite, [['a', 'b'], ['b', 'c'], ['e', 'f']])
+
+  t.end()
+})
+
 async function simpleGraph (graph) {
   await graph.put('a', 'b', 'parent')
   await graph.put('b', 'a', 'child')
