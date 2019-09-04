@@ -69,6 +69,18 @@ test('deletions work correctly', async t => {
   t.end()
 })
 
+test('simple graph batch', async t => {
+  const trie = hypertrie(ram)
+  const graph = new Graph(trie)
+
+  await simpleGraphBatch(graph)
+
+  const ite = graph.iterator({ from: 'a', label: 'parent' })
+  await validate(t, ite, [['a', 'b'], ['a', 'd'], ['b', 'c']])
+
+  t.end()
+})
+
 async function simpleGraph (graph) {
   await graph.put('a', 'b', 'parent')
   await graph.put('b', 'a', 'child')
@@ -78,6 +90,19 @@ async function simpleGraph (graph) {
   await graph.put('d', 'a', 'child')
   await graph.put('e', 'f', 'parent')
   await graph.put('f', 'e', 'child')
+}
+
+async function simpleGraphBatch (graph) {
+  await graph.batch([
+    { type: 'put', from: 'a', to: 'b', label: 'parent' },
+    { type: 'put', from: 'b', to: 'a', label: 'child' },
+    { type: 'put', from: 'b', to: 'c', label: 'parent' },
+    { type: 'put', from: 'c', to: 'b', label: 'child' },
+    { type: 'put', from: 'a', to: 'd', label: 'parent' },
+    { type: 'put', from: 'd', to: 'a', label: 'child' },
+    { type: 'put', from: 'e', to: 'f', label: 'parent' },
+    { type: 'put', from: 'f', to: 'e', label: 'child' }
+  ])
 }
 
 async function cyclicGraph (graph) {

@@ -37,6 +37,22 @@ class HypertrieGraph {
     }))
   }
 
+  batch (ops, cb) {
+    ops = ops.map(({ from, to, label, type }) => {
+      return {
+        key: this._key({ from, to, label }),
+        type,
+        value: null
+      }
+    })
+    return maybe(cb, new Promise((resolve, reject) => {
+      this.trie.batch(ops, err => {
+        if (err) return reject(err)
+        return resolve()
+      })
+    }))
+  }
+
   iterator (opts = {}) {
     const self = this
 
