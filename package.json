@@ -1,5 +1,5 @@
 {
-  "name": "hypertrie-graph",
+  "name": "hypertrie-multigraph",
   "version": "1.0.0",
   "description": "A simple directed multigraph built on Hypertrie",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andrewosh/hypertrie-graph.git"
+    "url": "git+https://github.com/andrewosh/hypertrie-multigraph.git"
   },
   "keywords": [
     "hypertrie",
@@ -17,9 +17,9 @@
   "author": "Andrew Osheroff <andrewosh@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/andrewosh/hypertrie-graph/issues"
+    "url": "https://github.com/andrewosh/hypertrie-multigraph/issues"
   },
-  "homepage": "https://github.com/andrewosh/hypertrie-graph#readme",
+  "homepage": "https://github.com/andrewosh/hypertrie-multigraph#readme",
   "devDependencies": {
     "hypertrie": "^3.7.1",
     "random-access-memory": "^3.1.1",
