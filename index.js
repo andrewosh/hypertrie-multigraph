@@ -1,12 +1,14 @@
 const nanoiterator = require('nanoiterator')
+const hypertrie = require('hypertrie')
 const maybe = require('call-me-maybe')
 
 const { StackIterator } = require('./lib/iterators')
 
 class HypertrieGraph {
-  constructor (trie, opts) {
-    this.trie = trie
-    this.opts = opts
+  constructor (storage, opts) {
+    this.trie = hypertrie(storage, opts)
+    this.ready = this.trie.ready.bind(this.trie)
+    this._opts = opts
   }
 
   _key (opts = {}) {
@@ -81,6 +83,15 @@ class HypertrieGraph {
         return cb(null, { from, to })
       })
     }
+  }
+
+  replicate (opts) {
+    return this.trie.replicate(opts)
+  }
+
+  close (cb) {
+    if (!this.trie.feed) return process.nextTick(cb, null)
+    return this.trie.feed.close(cb)
   }
 }
 
