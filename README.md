@@ -1,5 +1,5 @@
 # hypertrie-multigraph
-[![Build Status](https://travis-ci.com/andrewosh/hypertrie-graph.svg?token=WgJmQm3Kc6qzq1pzYrkx&branch=master)](https://travis-ci.com/andrewosh/hypertrie-graph)
+[![Build Status](https://travis-ci.com/andrewosh/hypertrie-multigraph.svg?branch=master)](https://travis-ci.com/andrewosh/hypertrie-multigraph)
 
 A simple directed multigraph built on Hypertrie. Edges are stored in the Hypertrie using keys of the form `label/from/to`. Currently, the API exposes an iterator that performs a depth-first graph traversal.
 
@@ -34,10 +34,25 @@ const ite = graph.iterator({ from: 'a', label: 'my-label', depth: 1 })
 Creates a new graph that uses the `trie` for storage.
 
 #### `await graph.put(from, to, label, [cb])`
-Creates a labelled edge between `from` and `to`. Returns a Promise.
+Creates a labelled edge between `from` and `to`.
+
+Returns a Promise, and can optionally be used with a callback.
 
 #### `await graph.del(from, to, label, [cb])`
-Delete the edge.
+Delete an edge.
+
+#### `await graph.batch(ops, [cb])`
+Batch insert/delete many edges.
+
+`ops` is an Array with entries of the form:
+```js
+{
+  type: 'put' | 'del',
+  from: 'a',
+  to: 'b',
+  label: 'my-label
+}
+```
 
 #### `const ite = graph.iterator(opts)`
 Creates a depth-first graph iterator that accepts the following options:
