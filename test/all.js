@@ -1,12 +1,10 @@
 const test = require('tape')
 
 const ram = require('random-access-memory')
-const hypertrie = require('hypertrie')
 const Graph = require('..')
 
 test('single-level one-label graph traversal for a single key', async t => {
-  const trie = hypertrie(ram)
-  const graph = new Graph(trie)
+  const graph = new Graph(ram)
 
   await simpleGraph(graph)
 
@@ -17,8 +15,7 @@ test('single-level one-label graph traversal for a single key', async t => {
 })
 
 test('multi-level one-label graph traversal for a single key', async t => {
-  const trie = hypertrie(ram)
-  const graph = new Graph(trie)
+  const graph = new Graph(ram)
 
   await simpleGraph(graph)
 
@@ -29,8 +26,7 @@ test('multi-level one-label graph traversal for a single key', async t => {
 })
 
 test('can get all edges with a given label', async t => {
-  const trie = hypertrie(ram)
-  const graph = new Graph(trie)
+  const graph = new Graph(ram)
 
   await simpleGraph(graph)
 
@@ -41,8 +37,7 @@ test('can get all edges with a given label', async t => {
 })
 
 test('cycles are handled correctly', async t => {
-  const trie = hypertrie(ram)
-  const graph = new Graph(trie)
+  const graph = new Graph(ram)
 
   await cyclicGraph(graph)
 
@@ -53,8 +48,7 @@ test('cycles are handled correctly', async t => {
 })
 
 test('deletions work correctly', async t => {
-  const trie = hypertrie(ram)
-  const graph = new Graph(trie)
+  const graph = new Graph(ram)
 
   await simpleGraph(graph)
 
@@ -70,8 +64,7 @@ test('deletions work correctly', async t => {
 })
 
 test('simple graph batch', async t => {
-  const trie = hypertrie(ram)
-  const graph = new Graph(trie)
+  const graph = new Graph(ram)
 
   await simpleGraphBatch(graph)
 
