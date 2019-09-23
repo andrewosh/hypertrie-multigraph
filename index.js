@@ -85,8 +85,8 @@ class HypertrieGraph {
     }
   }
 
-  replicate (opts) {
-    return this.trie.replicate(opts)
+  replicate (isInitiator, opts) {
+    return this.trie.replicate(isInitiator, opts)
   }
 
   close (cb) {
