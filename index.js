@@ -2,7 +2,7 @@ const nanoiterator = require('nanoiterator')
 const hypertrie = require('hypertrie')
 const maybe = require('call-me-maybe')
 
-const StackIterator = require('hypertrie-stack-iterator')
+const StackIterator = require('stackable-nanoiterator')
 
 class HypertrieGraph {
   constructor (storage, opts) {
