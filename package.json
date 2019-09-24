@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "call-me-maybe": "^1.0.1",
+    "hypertrie-stack-iterator": "^1.0.0",
     "nanoiterator": "^1.2.0"
   }
 }

@@ -2,7 +2,7 @@ const nanoiterator = require('nanoiterator')
 const hypertrie = require('hypertrie')
 const maybe = require('call-me-maybe')
 
-const { StackIterator } = require('./lib/iterators')
+const StackIterator = require('hypertrie-stack-iterator')
 
 class HypertrieGraph {
   constructor (storage, opts) {
@@ -58,7 +58,10 @@ class HypertrieGraph {
   iterator (opts = {}) {
     const self = this
 
-    const ite = new StackIterator(opts.depth)
+    const ite = new StackIterator({
+      maxDepth: opts.depth
+    })
+
     const visited = new Set()
 
     ite.push(this.trie.iterator(this._key(opts), { recursive: true }))
