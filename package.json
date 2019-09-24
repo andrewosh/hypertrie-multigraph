@@ -1,6 +1,6 @@
 {
   "name": "hypertrie-multigraph",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "A simple directed multigraph built on Hypertrie",
   "main": "index.js",
   "scripts": {
